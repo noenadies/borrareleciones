@@ -129,23 +129,93 @@
 <script>
 
 
-
+var todovotantest={ant:0,des:0,ahora:0};
 var  arraypuestooder=[];
-  firebase.database().ref("votantes").orderByChild("cedula").on("child_added", function(snapshot) {
-   // console.log(snapshot.val());
+var arraytodoordenode=[];
+  /*firebase.database().ref("votantes").orderByChild("puesto").on("child_added", function(snapshot) {
+  console.log(snapshot.val());
+  });*/
+var idxllamtodotodo=0;
+
+function traetodoordenadopor(st1){
+  firebase.database().ref("votantes").orderByChild(String(st1)).on("child_added", function(snapshot) {
+ // console.log(snapshot.val());
+  //todovotantest=snapshot.val();
+  arraytodoordenode.push(snapshot.val());
+  console.log("long  "+ todovotantest.des);
+ // elforordenatodopornodo();
+// creatd();
+todovotantest.ant=todovotantest.ahora;
+todovotantest.ahora=todovotantest.ahora+1;
+todovotantest.des=todovotantest.ahora;
+
   });
 
 
+}
+setInterval(function(){ 
 
-traerdef("votantes");
+if(arraytodoordenode.length==todovotantest.des){
+  setTimeout(function(){
+    todovotantest.des=0;
+    elforordenatodopornodo();
+    creatd();
+  },2000)
+  }
+
+ }, 3000);
+
+function elforordenatodopornodo(){
+
+for(var i in arraytodoordenode){
+    
+
+  arraypuestooder.push({cedula:arraytodoordenode[i].cedula,departamento:arraytodoordenode[i].departamento,
+    direccion:arraytodoordenode[i].direccion,
+email:arraytodoordenode[i].email,
+facebook:arraytodoordenode[i].facebook,
+fecha:arraytodoordenode[i].fecha,
+idreferido:arraytodoordenode[i].idreferido,
+mesa:arraytodoordenode[i].mesa,
+movil:arraytodoordenode[i].movil,
+municipio:arraytodoordenode[i].municipio ,
+notareferido:arraytodoordenode[i].notareferido,
+nombres:arraytodoordenode[i].nombre ,
+notauser:arraytodoordenode[i].notauser,
+referido:arraytodoordenode[i].referido,
+puesto:arraytodoordenode[i].puesto
+ 
+  
+  });
+
+    
+
+  }
+}
+
+
+
+
+
+
 
 var todovotantes;
 var vordenarpuesto="eeee";
-function traerdef(stnode){ 
-  firebase.database().ref().child(String(stnode)).once("value", function(snapshot) {
-    //console.log(snapshot.key + " was " + snapshot.val()+ " meters tall");
-todovotantes=snapshot.val();
-    for(var i in todovotantes){
+var vertraetodo=0;
+
+
+
+
+
+
+
+
+
+
+
+function elforfirepuesto(){
+
+  for(var i in todovotantes){
       if(todovotantes[i].puesto==vordenarpuesto){
   
 
@@ -170,13 +240,29 @@ todovotantes=snapshot.val();
       }
 
     }
-
-    creatd();
+}
+var sttraetodoordevotantepor="";
+function traerdef(stnode){ 
+  firebase.database().ref().child(String(stnode)).once("value", function(snapshot) { 
+    //console.log(snapshot.key + " was " + snapshot.val()+ " meters tall");
+todovotantes=snapshot.val();
+creatd();
 
   
   });
 
 }
+
+vertraetodo=0;
+iniciauno();
+function iniciauno(){
+  if(vertraetodo==1){vordenarpuesto="";traerdef("votantes");  elforfirepuesto();}
+  if(vertraetodo==0){ sttraetodoordevotantepor="puesto";traetodoordenadopor(sttraetodoordevotantepor);}
+  
+   
+}
+
+
 
 /*
 var st={  
